@@ -27,7 +27,7 @@ def explicitEuler(t, theta0, omega0, g, l):
 
 t0 = 0 # start
 T = 12 * np.pi # stop
-dt = 10e-2 # time step
+dt = np.pi / 20 # time step
 t2 = np.arange(t0, T, dt)
 
 f2 = lambda t, y: np.array([y[1], -g/l * np.sin(y[0])])
