@@ -16,6 +16,7 @@ def explicitEuler(t, theta0, omega0, g, l):
     omega = [omega0]
     y = np.array([theta, omega])
     t_last = t[0]
+    
     for k, t_cur in enumerate(t):
         if k == 0:
             continue
@@ -44,8 +45,26 @@ def implicitEuler(t, theta0, omega0, g, l):
         y[0,i] = y[0,i-1] + dt * y[1,i]
     return y[0]
 
+f3 = lambda t, y1, y2: -g/l * np.sin(y1)
+
+def verletIntegration(t, theta0, omega0, g, l):
+    y = np.zeros((2, len(t)))
+    y[0,0] = theta0
+    y[1,0] = omega0
+    y[0,1] = y[0,0] + dt * y[1,0] + 0.5 * dt ** 2 * f3(0, y[0,0], y[0,1]) # theta
+    y[1,1] = (y[0,0] - y[0,1]) / (2 * dt) # omega; or is this not possible as you need t-dt, t+dt
+    
+    for i, _ in enumerate(t):
+        if i in (0, 1):
+            continue
+        y[0,i] = 2 * y[0,i-1] - y[0,i-2] + dt ** 2 * f3(0, y[0,i-1], y[1,i-1]) # theta (pos)
+        y[1,i] = (y[0,i-2] - y[0,i]) / (2 * dt) # omega (vel)
+    return y[0]
+
+
 plt.plot(t1, thetaref, label="Small Angle")
 plt.plot(t1, explicitEuler(t1, theta0, omega0, g, l), label="Explicit Euler")
 plt.plot(t2, implicitEuler(t2, theta0, omega0, g, l), label="Implicit Euler")
+plt.plot(t2, verletIntegration(t2, theta0, omega0, g, l), label="Verlet integration")
 plt.legend()
 plt.show()
