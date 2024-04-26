@@ -10,7 +10,13 @@ arr7 = np.array([[-3,1,1],[1,-3,1],[1,1,-3]])
 
 # check symmetry
 def checkSymm(arr):
-    return (arr == arr.T).all()
+    # return (arr == arr.T).all()
+    arr_transp = arr.T
+    for i in range(len(arr)):
+        for j in range(len(arr_transp):
+            if not arr[i,j] == arr_transp[i,j]:
+                return False
+    return True
 
 arr1symm = checkSymm(arr1)
 arr2symm = checkSymm(arr2)
