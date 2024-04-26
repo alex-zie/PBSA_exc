@@ -9,25 +9,25 @@ arr6 = np.array([[6,3,-3],[3,6,3],[-3,3,6]])
 arr7 = np.array([[-3,1,1],[1,-3,1],[1,1,-3]])
 
 # check symmetry
-def checkSymm(arr):
+def check_symm(arr):
     # return (arr == arr.T).all()
     arr_transp = arr.T
     for i in range(len(arr)):
-        for j in range(len(arr_transp):
-            if not arr[i,j] == arr_transp[i,j]:
+        for j in range(len(arr_transp)):
+            if arr[i,j] != arr_transp[i,j]:
                 return False
     return True
 
-arr1symm = checkSymm(arr1)
-arr2symm = checkSymm(arr2)
-arr3symm = checkSymm(arr3)
-arr4symm = checkSymm(arr4)
-arr5symm = checkSymm(arr5)
-arr6symm = checkSymm(arr6)
-arr7symm = checkSymm(arr7)
+arr1symm = check_symm(arr1)
+arr2symm = check_symm(arr2)
+arr3symm = check_symm(arr3)
+arr4symm = check_symm(arr4)
+arr5symm = check_symm(arr5)
+arr6symm = check_symm(arr6)
+arr7symm = check_symm(arr7)
 
 # check diagonal dominance
-def checkDiagDom(arr):
+def check_diag_dom(arr):
     # abs_arr = np.abs(arr)
     # return np.all(2 * np.diag(abs_arr) >= np.sum(abs_arr, axis=1))
     main_elem = 0
@@ -43,19 +43,19 @@ def checkDiagDom(arr):
     return 'Diagonally dominant'
               
 
-arr1diagdom = checkDiagDom(arr1)
-arr2diagdom = checkDiagDom(arr2)
-arr3diagdom = checkDiagDom(arr3)
-arr4diagdom = checkDiagDom(arr4)
-arr5diagdom = checkDiagDom(arr5)
-arr6diagdom = checkDiagDom(arr6)
-arr7diagdom = checkDiagDom(arr7)
+arr1diagdom = check_diag_dom(arr1)
+arr2diagdom = check_diag_dom(arr2)
+arr3diagdom = check_diag_dom(arr3)
+arr4diagdom = check_diag_dom(arr4)
+arr5diagdom = check_diag_dom(arr5)
+arr6diagdom = check_diag_dom(arr6)
+arr7diagdom = check_diag_dom(arr7)
 
 # check definiteness
-def checkDef(arr):
-    if checkSymm(arr) is False:
+def check_def(arr):
+    if check_symm(arr) is False:
         return 'Indefinite'
-    evals, evecs = np.linalg.eig(arr) # probably illegal
+    evals, _ = np.linalg.eig(arr) # probably illegal
     if (evals > 0).all():
         return 'Symmetrically positive definite'
     if (evals >= 0).all():
@@ -65,5 +65,18 @@ def checkDef(arr):
     if (evals <= 0).all():
         return 'Symmetrically negative semi-definite'
     return 'Error'
+    # can be done w/o libraries but big headache therefore i'm leaving it as is
+    # msg = ''
+    # # Hauptminoren
+    # hauptminoren = np.zeros([len(arr), 1])
+    # for i in range(len(arr)):
+    #     hauptminoren[i] = np.linalg.det(arr[:i+1, :i+1])
+    # print(hauptminoren)
+    # if (hauptminoren > 0).all():
+    #     return 'Symmetrically positive definite'
+    # for j in range(len(hauptminoren)):
+    #     if (j % 2 == 0 and hauptminoren[j] <= 0) or (j % 2 == 1 and hauptminoren[j] >= 0):
+    #         msg = ''
+        
 
-print(checkDef(arr1))
+print(check_def(arr1))
