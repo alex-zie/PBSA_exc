@@ -1,5 +1,6 @@
 import numpy as np
 
+# arrays from worksheet
 arr1 = np.array([[8,5,6],[5,6,4],[6,4,7]])
 arr2 = np.array([[6,-3,2],[3,5,1],[-2,-1,4]])
 arr3 = np.array([[3,5,6],[21,35,42],[27,45,54]])
@@ -41,7 +42,6 @@ def check_diag_dom(arr):
     if main_elem > elem_sum:
         return 'Strictly diagonally dominant'
     return 'Diagonally dominant'
-              
 
 arr1diagdom = check_diag_dom(arr1)
 arr2diagdom = check_diag_dom(arr2)
@@ -64,7 +64,7 @@ def check_def(arr):
         return 'Symmetrically negative definite'
     if (evals <= 0).all():
         return 'Symmetrically negative semi-definite'
-    return 'Error'
+    return 'Indefinite'
     # can be done w/o libraries but big headache therefore i'm leaving it as is
     # msg = ''
     # # Hauptminoren
@@ -77,6 +77,11 @@ def check_def(arr):
     # for j in range(len(hauptminoren)):
     #     if (j % 2 == 0 and hauptminoren[j] <= 0) or (j % 2 == 1 and hauptminoren[j] >= 0):
     #         msg = ''
-        
 
-print(check_def(arr1))
+check_def(arr1)
+check_def(arr2)
+check_def(arr3)
+check_def(arr4)
+check_def(arr5)
+check_def(arr6)
+check_def(arr7)
