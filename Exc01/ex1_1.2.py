@@ -51,19 +51,19 @@ arr5diagdom = checkDiagDom(arr5)
 arr6diagdom = checkDiagDom(arr6)
 arr7diagdom = checkDiagDom(arr7)
 
-# check definitness
+# check definiteness
 def checkDef(arr):
     if checkSymm(arr) is False:
-        return 'Indefinit'
+        return 'Indefinite'
     evals, evecs = np.linalg.eig(arr) # probably illegal
     if (evals > 0).all():
-        return 'Strictly positiv definit'
+        return 'Symmetrically positive definite'
     if (evals >= 0).all():
-        return 'Strictly positiv semi-definit'
+        return 'Symmetrically positive semi-definite'
     if (evals < 0).all():
-        return 'Strictly negativ definit'
+        return 'Symmetrically negative definite'
     if (evals <= 0).all():
-        return 'Strictly negativ semi-definit'
+        return 'Symmetrically negative semi-definite'
     return 'Error'
 
 print(checkDef(arr1))
