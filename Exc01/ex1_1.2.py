@@ -10,7 +10,13 @@ arr7 = np.array([[-3,1,1],[1,-3,1],[1,1,-3]])
 
 # check symmetry
 def checkSymm(arr):
-    return (arr == arr.T).all()
+    # return (arr == arr.T).all()
+    arr_transp = arr.T
+    for i in range(len(arr)):
+        for j in range(len(arr_transp):
+            if not arr[i,j] == arr_transp[i,j]:
+                return False
+    return True
 
 arr1symm = checkSymm(arr1)
 arr2symm = checkSymm(arr2)
@@ -45,19 +51,19 @@ arr5diagdom = checkDiagDom(arr5)
 arr6diagdom = checkDiagDom(arr6)
 arr7diagdom = checkDiagDom(arr7)
 
-# check definitness
+# check definiteness
 def checkDef(arr):
     if checkSymm(arr) is False:
-        return 'Indefinit'
+        return 'Indefinite'
     evals, evecs = np.linalg.eig(arr) # probably illegal
     if (evals > 0).all():
-        return 'Strictly positiv definit'
+        return 'Symmetrically positive definite'
     if (evals >= 0).all():
-        return 'Strictly positiv semi-definit'
+        return 'Symmetrically positive semi-definite'
     if (evals < 0).all():
-        return 'Strictly negativ definit'
+        return 'Symmetrically negative definite'
     if (evals <= 0).all():
-        return 'Strictly negativ semi-definit'
+        return 'Symmetrically negative semi-definite'
     return 'Error'
 
 print(checkDef(arr1))
