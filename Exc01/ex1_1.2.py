@@ -11,13 +11,15 @@ arr7 = np.array([[-3,1,1],[1,-3,1],[1,1,-3]])
 
 # check symmetry
 def check_symm(arr):
-    # return (arr == arr.T).all()
-    arr_transp = arr.T
-    for i in range(len(arr)):
-        for j in range(len(arr_transp)):
-            if arr[i,j] != arr_transp[i,j]:
-                return False
-    return True
+    # using built-in method
+    return (arr == arr.T).all()
+    # without using methods
+    # arr_transp = arr.T
+    # for i in range(len(arr)):
+    #     for j in range(len(arr_transp)):
+    #         if arr[i,j] != arr_transp[i,j]:
+    #             return False
+    # return True
 
 arr1symm = check_symm(arr1)
 arr2symm = check_symm(arr2)
@@ -29,19 +31,25 @@ arr7symm = check_symm(arr7)
 
 # check diagonal dominance
 def check_diag_dom(arr):
-    # abs_arr = np.abs(arr)
-    # return np.all(2 * np.diag(abs_arr) >= np.sum(abs_arr, axis=1))
-    main_elem = 0
-    elem_sum = 0
-    for i in range(len(arr)):
-        main_elem = np.abs(arr[i,i])
-        for j in range(len(arr)):
-            elem_sum += np.abs(arr[i,j])
-        if elem_sum > main_elem:
-            return 'Not diagonally dominant'
-    if main_elem > elem_sum:
+    # using built-in methods
+    abs_arr = np.abs(arr)
+    if 2 * np.diag(abs_arr) > np.sum(abs_arr, axis=1):
         return 'Strictly diagonally dominant'
-    return 'Diagonally dominant'
+    elif 2 * np.diag(abs_arr) >= np.sum(abs_arr, axis=1):
+        return 'Diagonally dominant'
+    return 'Not diagonally dominant'
+    # without using methods
+    # main_elem = 0
+    # elem_sum = 0
+    # for i in range(len(arr)):
+    #     main_elem = np.abs(arr[i,i])
+    #     for j in range(len(arr)):
+    #         elem_sum += np.abs(arr[i,j])
+    #     if elem_sum > main_elem:
+    #         return 'Not diagonally dominant'
+    # if main_elem > elem_sum:
+    #     return 'Strictly diagonally dominant'
+    # return 'Diagonally dominant'
 
 arr1diagdom = check_diag_dom(arr1)
 arr2diagdom = check_diag_dom(arr2)
