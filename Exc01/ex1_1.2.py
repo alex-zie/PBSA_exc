@@ -12,14 +12,16 @@ arr7 = np.array([[-3,1,1],[1,-3,1],[1,1,-3]])
 # check symmetry
 def check_symm(arr):
     # using built-in method
-    return (arr == arr.T).all()
+    if (arr == arr.T).all():
+        return "Symmetric"
+    return "Not symmetric"
     # without using methods
     # arr_transp = arr.T
     # for i in range(len(arr)):
     #     for j in range(len(arr_transp)):
     #         if arr[i,j] != arr_transp[i,j]:
-    #             return False
-    # return True
+    #             return "Not symmetric"
+    # return "Symmetric"
 
 arr1symm = check_symm(arr1)
 arr2symm = check_symm(arr2)
@@ -33,9 +35,9 @@ arr7symm = check_symm(arr7)
 def check_diag_dom(arr):
     # using built-in methods
     abs_arr = np.abs(arr)
-    if 2 * np.diag(abs_arr) > np.sum(abs_arr, axis=1):
+    if (2 * np.diag(abs_arr) > np.sum(abs_arr, axis=1)).all():
         return 'Strictly diagonally dominant'
-    elif 2 * np.diag(abs_arr) >= np.sum(abs_arr, axis=1):
+    elif (2 * np.diag(abs_arr) >= np.sum(abs_arr, axis=1)).all():
         return 'Diagonally dominant'
     return 'Not diagonally dominant'
     # without using methods
@@ -86,10 +88,19 @@ def check_def(arr):
     #     if (j % 2 == 0 and hauptminoren[j] <= 0) or (j % 2 == 1 and hauptminoren[j] >= 0):
     #         msg = ''
 
-check_def(arr1)
-check_def(arr2)
-check_def(arr3)
-check_def(arr4)
-check_def(arr5)
-check_def(arr6)
-check_def(arr7)
+arr1def = check_def(arr1)
+arr2def = check_def(arr2)
+arr3def = check_def(arr3)
+arr4def = check_def(arr4)
+arr5def = check_def(arr5)
+arr6def = check_def(arr6)
+arr7def = check_def(arr7)
+
+# print out all results
+print("1:", arr1symm ,",", arr1diagdom ,",", arr1def)
+print("2:", arr2symm ,",", arr2diagdom ,",", arr2def)
+print("3:", arr3symm ,",", arr3diagdom ,",", arr3def)
+print("4:", arr4symm ,",", arr4diagdom ,",", arr4def)
+print("5:", arr5symm ,",", arr5diagdom ,",", arr5def)
+print("6:", arr6symm ,",", arr6diagdom ,",", arr6def)
+print("7:", arr7symm ,",", arr7diagdom ,",", arr7def)
