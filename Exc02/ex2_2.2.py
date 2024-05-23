@@ -32,3 +32,12 @@ print(mat_1 @ test_vec) # expected: (-1, 0, 0)
 print(mat_2 @ test_vec) # expected: (0, -2, 2)
 print(mat_3 @ test_vec) # expected: (0, -1, -2)
 print(mat_4 @ test_vec) # expected: 
+
+# 2.2b)
+v = np.reshape([1, 0, 3], (3, 1))
+r = np.array([0, 1, 0])
+
+def rodrigues_formel(v, r, theta):
+    return v * np.cos(theta) + (1 - np.cos(theta)) * (r @ v) * np.reshape(r, (3, 1)) + np.reshape(np.cross(r, np.reshape(v, (1, 3))), (3, 1)) * np.sin(theta)
+
+print(rodrigues_formel(v, r, np.pi/2))
