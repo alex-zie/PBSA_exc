@@ -20,8 +20,8 @@ def explicit_euler(t, theta0, omega0, g, l):
             continue
         dt, t_last = t_cur - t_last, t_cur
         y = [theta[k-1], omega[k-1]] + dt * f1(t_cur, theta[k-1], omega[k-1])
-        theta.append(y[0]) # selber füllen
-        omega.append(y[1]) # selber füllen
+        theta.append(y[0])
+        omega.append(y[1])
     return np.asarray(theta)
 
 t0 = 0 # start

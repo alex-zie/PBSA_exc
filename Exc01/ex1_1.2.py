@@ -11,13 +11,17 @@ arr7 = np.array([[-3,1,1],[1,-3,1],[1,1,-3]])
 
 # check symmetry
 def check_symm(arr):
-    # return (arr == arr.T).all()
-    arr_transp = arr.T
-    for i in range(len(arr)):
-        for j in range(len(arr_transp)):
-            if arr[i,j] != arr_transp[i,j]:
-                return False
-    return True
+    # using built-in method
+    if (arr == arr.T).all():
+        return "Symmetric"
+    return "Not symmetric"
+    # without using methods
+    # arr_transp = arr.T
+    # for i in range(len(arr)):
+    #     for j in range(len(arr_transp)):
+    #         if arr[i,j] != arr_transp[i,j]:
+    #             return "Not symmetric"
+    # return "Symmetric"
 
 arr1symm = check_symm(arr1)
 arr2symm = check_symm(arr2)
@@ -29,19 +33,25 @@ arr7symm = check_symm(arr7)
 
 # check diagonal dominance
 def check_diag_dom(arr):
-    # abs_arr = np.abs(arr)
-    # return np.all(2 * np.diag(abs_arr) >= np.sum(abs_arr, axis=1))
-    main_elem = 0
-    elem_sum = 0
-    for i in range(len(arr)):
-        main_elem = np.abs(arr[i,i])
-        for j in range(len(arr)):
-            elem_sum += np.abs(arr[i,j])
-        if elem_sum > main_elem:
-            return 'Not diagonally dominant'
-    if main_elem > elem_sum:
+    # using built-in methods
+    abs_arr = np.abs(arr)
+    if (2 * np.diag(abs_arr) > np.sum(abs_arr, axis=1)).all():
         return 'Strictly diagonally dominant'
-    return 'Diagonally dominant'
+    elif (2 * np.diag(abs_arr) >= np.sum(abs_arr, axis=1)).all():
+        return 'Diagonally dominant'
+    return 'Not diagonally dominant'
+    # without using methods
+    # main_elem = 0
+    # elem_sum = 0
+    # for i in range(len(arr)):
+    #     main_elem = np.abs(arr[i,i])
+    #     for j in range(len(arr)):
+    #         elem_sum += np.abs(arr[i,j])
+    #     if elem_sum > main_elem:
+    #         return 'Not diagonally dominant'
+    # if main_elem > elem_sum:
+    #     return 'Strictly diagonally dominant'
+    # return 'Diagonally dominant'
 
 arr1diagdom = check_diag_dom(arr1)
 arr2diagdom = check_diag_dom(arr2)
@@ -78,10 +88,19 @@ def check_def(arr):
     #     if (j % 2 == 0 and hauptminoren[j] <= 0) or (j % 2 == 1 and hauptminoren[j] >= 0):
     #         msg = ''
 
-check_def(arr1)
-check_def(arr2)
-check_def(arr3)
-check_def(arr4)
-check_def(arr5)
-check_def(arr6)
-check_def(arr7)
+arr1def = check_def(arr1)
+arr2def = check_def(arr2)
+arr3def = check_def(arr3)
+arr4def = check_def(arr4)
+arr5def = check_def(arr5)
+arr6def = check_def(arr6)
+arr7def = check_def(arr7)
+
+# print out all results
+print("1:", arr1symm ,",", arr1diagdom ,",", arr1def)
+print("2:", arr2symm ,",", arr2diagdom ,",", arr2def)
+print("3:", arr3symm ,",", arr3diagdom ,",", arr3def)
+print("4:", arr4symm ,",", arr4diagdom ,",", arr4def)
+print("5:", arr5symm ,",", arr5diagdom ,",", arr5def)
+print("6:", arr6symm ,",", arr6diagdom ,",", arr6def)
+print("7:", arr7symm ,",", arr7diagdom ,",", arr7def)
