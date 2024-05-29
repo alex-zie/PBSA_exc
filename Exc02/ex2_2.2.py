@@ -19,7 +19,7 @@ def translation_matrix(x, y, z):
 mat_1 = rotation_matrix(np.pi/2, 'z')
 mat_2 = translation_matrix(0, -2, 1) @ rotation_matrix(np.pi/2, 'x')
 mat_3 = rotation_matrix(np.pi/2, 'z') @ translation_matrix(-1, -1, -2)
-mat_4 = ...
+mat_4 = np.array([[1, 0, 0, 0], [0, 1, 0, 0], [0, 0, 0, 0], [0, 0, 1/1, 1]])
 # Transformationsmatrizen
 print(mat_1)
 print(mat_2)
