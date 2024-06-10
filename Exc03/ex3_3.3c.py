@@ -19,14 +19,14 @@ def preconditioned_cg(A, b, x0=None, tol=1e-3, max_iter=25, omega=0):
     if omega < 0 or omega > 1:
         print("omega muss zwischen 0 und 1 liegen!")
         return
-    
+
     # preconditioning
     D = np.diag(np.diag(A.toarray())) # Diagonalteil
     L = np.tril(A.toarray(), -1) # unterer Dreiecksteil
     if (L + D + L.T != A).all():
         print("Matrix A ist nicht symmetrisch!")
         return
-    
+
     if omega == 0:
         M = D
     else:
@@ -42,7 +42,7 @@ def preconditioned_cg(A, b, x0=None, tol=1e-3, max_iter=25, omega=0):
     r = b - A@x
     z = np.linalg.solve(M, r)
     p = z.copy()
-    
+
     for i in range(max_iter):
         r_old = r.copy()
         z_old = z.copy()
@@ -50,10 +50,10 @@ def preconditioned_cg(A, b, x0=None, tol=1e-3, max_iter=25, omega=0):
         alpha = np.inner(r, z) / np.inner(p, Ap) # inner, damit ich nicht transponieren muss
         x += alpha * p
         r -= alpha * Ap
-        
+
         if np.linalg.norm(r) < tol:
             break
-        
+
         z = np.linalg.solve(M, r)
         beta = (np.inner(z, r) / np.inner(z_old, r_old))
         p = z + beta*p
