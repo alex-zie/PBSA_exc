@@ -71,6 +71,7 @@ x_ref = scipy.sparse.linalg.cg(A, b)
 print("Lösung mit cg:", x_ref[0])
 print("")
 
+# 3
 A = scipy.sparse.csr_matrix(scipy.linalg.toeplitz([3.0, -1] + [0] * (17 - 2)))
 b = np.ones((A.shape[1],1))
 
