@@ -1,6 +1,4 @@
 import numpy as np
-import scipy
-import scipy.linalg 
 
 def conjugate_gradients(A, b, x0=None, tol=1e-3, max_iter=25):
     """
@@ -24,17 +22,17 @@ def conjugate_gradients(A, b, x0=None, tol=1e-3, max_iter=25):
         x = x0
     r = b - A@x
     d = r.copy()
-    
+
     for i in range(max_iter):
         r_old = r.copy()
         Ad = A@d
         alpha = np.inner(r, r) / np.inner(d, Ad) # inner, damit ich nicht transponieren muss
         x += alpha * d
         r -= alpha * Ad
-        
+
         if np.linalg.norm(r) < tol:
             break
-        
+
         beta = (np.inner(r, r) / np.inner(r_old, r_old))
         d = r + beta*d
 

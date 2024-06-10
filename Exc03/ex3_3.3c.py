@@ -1,6 +1,4 @@
 import numpy as np
-import scipy
-import scipy.linalg 
 
 def preconditioned_cg(A, b, x0=None, tol=1e-3, max_iter=25, omega=0):
     """
