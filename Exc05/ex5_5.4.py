@@ -33,23 +33,14 @@ Appp = xppp_mat @ x_mat_inv
 print(Appp)
 
 def polar_decomposition(A):
-    # Compute A * A.transpose (Hermitian for real matrices)
+    '''Polar decomposition of matrix A'''
     AA_T = np.matmul(A, A.transpose())
-
-    # Solve for eigenvalues and eigenvectors of A * A.transpose
     eigenvalues, eigenvectors = np.linalg.eig(AA_T)
-
-    # Ensure positive eigenvalues (square root might be complex otherwise)
     eigenvalues = np.abs(eigenvalues)
-
-    # Take square root of eigenvalues (element-wise)
     S = np.diag(np.sqrt(eigenvalues))
 
-    # Form the positive semi-definite Hermitian matrix (P)
-    P = np.matmul(eigenvectors, S)
-    P = np.matmul(P, np.conjugate(eigenvectors.T))
-
-    # Form the unitary matrix (U) based on eigenvectors
+    P = eigenvectors @ S
+    P = P @ np.conjugate(eigenvectors.T)
     U = eigenvectors
 
     return U, P
